@@ -49,15 +49,8 @@ bot.on("message", async message => {
       if (!err && res.statusCode == 200) {
         var importedJSON = JSON.parse(body);
         var imageURL = importedJSON.data.children[0].data.url;
-        pool.connect(function(err, client){
-          if(err){
-            console.log(err);
-            return message.channel.send("I\'m having problems!");
-          }
-          else{
-            findURL(client, imageURL, importedJSON, params, 1);
-          }
-        });
+        console.log("POSTING...")
+        return message.channel.send(imageURL);
       }
       else {
         console.log("ERROR READING JSON");
@@ -67,24 +60,5 @@ bot.on("message", async message => {
 
   }
 });
-
-// Function to get URL
-
-function findURL(client, imageURL, importedJSON, params, i){
-  var queryString = 'SELECT * FROM urls WHERE url = \'' + imageURL + '\'';
-  client.query(queryString, function(err, result){
-    if(result.rows.length == 0){
-      queryString = 'INSERT INTO urls (url) VALUES (\'' + imageURL + '\')';
-      client.query(queryString);
-      console.log("POSTING...")
-      return message.channel.send(imageURL);
-    }
-    else{
-      imageURL = importedJSON.data.children[i].data.url;
-      i++;
-      return findURL(client, imageURL, importedJSON, params, i);
-    }
-  });
-}
 
 bot.login(process.env.DISCORD_TOKEN);
