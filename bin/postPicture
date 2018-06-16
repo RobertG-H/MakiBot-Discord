@@ -3,7 +3,7 @@
 
 require('dotenv').config(); // For process.env to work
 
-const botconfig = require("./botconfig.json");
+const botconfig = require("./../botconfig.json");
 const Discord = require("discord.js");
 
 var bot = new Discord.Client ({disableEveryone: true});
