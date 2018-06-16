@@ -1,0 +1,17 @@
+{
+  "name": "makibot",
+  "version": "1.0.0",
+  "description": "An image posting bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robert Graham-Hu",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "dotenv": "^6.0.0",
+    "get-image-urls": "^1.0.5",
+    "pg": "^7.4.3"
+  }
+}
