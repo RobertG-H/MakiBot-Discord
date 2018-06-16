@@ -1,6 +1,43 @@
 #!/usr/bin/env node
 "use strict"
 
-var index = require('./../index.js');
+require('dotenv').config(); // For process.env to work
 
-index.sendPicture.handler;
+const botconfig = require("./botconfig.json");
+const Discord = require("discord.js");
+
+var bot = new Discord.Client ({disableEveryone: true});
+
+var request = require('request');
+var url = require('url');
+
+var siteUrl = process.env.SITE_URL;
+
+var NotifyChannel;
+
+
+bot.on("ready", async () => {
+  //var server = guild;
+  console.log(`${bot.user.username} is online!`);
+  bot.user.setGame("Lewd the dragon loli");
+  //server.createChannel("anime-pics", "text");
+  NotifyChannel = bot.channels.find("name", "general"); //MIGHT NEED TO BE CHANGED
+  sendPicture ();
+});
+
+function sendPicture () {
+  request(siteUrl, function(err, res, body){
+    if (!err && res.statusCode == 200) {
+      var importedJSON = JSON.parse(body);
+      var imageURL = importedJSON.data.children[0].data.url;
+      console.log("POSTING...")
+      NotifyChannel.send(imageURL);
+    }
+    else {
+      console.log("ERROR READING JSON");
+      NotifyChannel.send("I\'m having problems!");
+    }
+  });
+}
+
+bot.login(process.env.DISCORD_TOKEN);

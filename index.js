@@ -7,7 +7,6 @@ var bot = new Discord.Client ({disableEveryone: true});
 
 var request = require('request');
 var url = require('url');
-var pg = require('pg');
 
 var siteUrl = process.env.SITE_URL;
 
@@ -15,8 +14,10 @@ var NotifyChannel;
 
 
 bot.on("ready", async () => {
+  //var server = guild;
   console.log(`${bot.user.username} is online!`);
   bot.user.setGame("Lewd the dragon loli");
+  //server.createChannel("anime-pics", "text");
   NotifyChannel = bot.channels.find("name", "general"); //MIGHT NEED TO BE CHANGED
 });
 
