@@ -11,9 +11,9 @@
   "dependencies": {
     "discord.js": "^11.3.2",
     "dotenv": "^6.0.0",
-    "get-image-urls": "^1.0.5",
-    "heroku": "^7.0.97",
+    "heroku": "^7.0.98",
     "heroku-cli": "^7.0.9",
+    "node-cron": "^1.2.1",
     "pg": "^7.4.3"
   }
 }

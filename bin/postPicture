@@ -32,10 +32,12 @@ function sendPicture () {
       var imageURL = importedJSON.data.children[0].data.url;
       console.log("POSTING...")
       NotifyChannel.send(imageURL);
+      process.exit();
     }
     else {
       console.log("ERROR READING JSON");
       NotifyChannel.send("I\'m having problems!");
+      process.exit();
     }
   });
 }

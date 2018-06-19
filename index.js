@@ -1,18 +1,24 @@
 require('dotenv').config(); // For process.env to work
 
+// Discord bot stuff
 const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
-
 var bot = new Discord.Client ({disableEveryone: true});
 
+// Url and request stuff
 var request = require('request');
 var url = require('url');
-
 var siteUrl = process.env.SITE_URL;
 
+// Custom channel stuff
 var NotifyChannel;
 
+// Scheduler stuff
+var cron = require('node-cron');
 
+// TODO add database support for non-duplicate links
+
+// Bot setup
 bot.on("ready", async () => {
   //var server = guild;
   console.log(`${bot.user.username} is online!`);
@@ -21,6 +27,7 @@ bot.on("ready", async () => {
   NotifyChannel = bot.channels.find("name", "general"); //MIGHT NEED TO BE CHANGED
 });
 
+// Message commands (prefix: ~)
 bot.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -42,9 +49,11 @@ bot.on("message", async message => {
     .setThumbnail(bicon)
     .addField("Bot Name", bot.user.username)
     .addField("Created On", bot.user.createdAt);
-
     return message.channel.send(botembed);
   }
+
+  if(cmd === `${prefix}help` || cmd === `${prefix}Help`) return message.channel.send(
+    "Hiya! My name is Makibot. I post lewd photos just in the general channel for you at 8am and 8pm everyday ( ͡° ͜ʖ ͡°)");
 
   // Post Picture command
   if(cmd === `${prefix}post`){
@@ -52,6 +61,7 @@ bot.on("message", async message => {
   }
 });
 
+// Send Picture function
 function sendPicture () {
   request(siteUrl, function(err, res, body){
     if (!err && res.statusCode == 200) {
@@ -67,12 +77,10 @@ function sendPicture () {
   });
 }
 
-bot.login(process.env.DISCORD_TOKEN);
+// Scheduler
+cron.schedule('20,21,22 * * * *', function(){
+  console.log('running every minute 20');
+  sendPicutre ();
+});
 
-module.exports = () => {
-  return {
-    sendPicture: {
-      handler: sendPicture.bind (null)
-    }
-  }
-}
+bot.login(process.env.DISCORD_TOKEN);
