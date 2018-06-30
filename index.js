@@ -7,7 +7,6 @@ require('dotenv').config(); // For process.env to work
 const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 var bot = new Discord.Client ({disableEveryone: true});
-bot.listen(80|| 5000);
 
 // Url and request stuff
 var request = require('request');
@@ -144,6 +143,9 @@ cron.schedule('* 8,20 * * *', function(){
 bot.login(process.env.DISCORD_TOKEN);
 
 // Self pinging
+var express = require('express');
+var app = express();
+app.set('port', (80|| 5000));
 var http = require("http");
 setInterval(function() {
     http.get("http://maki-bot-discord.herokuapp.com");
