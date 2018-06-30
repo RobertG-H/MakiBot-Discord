@@ -145,7 +145,7 @@ bot.login(process.env.DISCORD_TOKEN);
 // Self pinging
 var express = require('express');
 var app = express();
-app.set('port', (80|| 5000));
+app.set('port', (process.env.PORT|| 5000));
 var http = require("http");
 setInterval(function() {
     http.get("http://maki-bot-discord.herokuapp.com");
