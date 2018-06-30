@@ -141,3 +141,9 @@ cron.schedule('* 8,20 * * *', function(){
 });
 
 bot.login(process.env.DISCORD_TOKEN);
+
+// Self pinging
+var http = require("http");
+setInterval(function() {
+    http.get("http://maki-bot-discord.herokuapp.com");
+}, 300000);
