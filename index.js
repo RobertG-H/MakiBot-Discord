@@ -136,7 +136,7 @@ function addPostChannel (server, channelName) {
 } */
 
 // Scheduler
-cron.schedule('0 12,0 * * *', function(){
+cron.schedule('0 13,1 * * *', function(){
   sendPicture ();
 });
 
