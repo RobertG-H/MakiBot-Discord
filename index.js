@@ -25,7 +25,7 @@ var cron = require('node-cron');
 // Bot setup
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online!`);
-  bot.user.setActivity("Lewding all dragon lolis");
+  bot.user.setActivity("Lolice Simulator 2019 owo");
 });
 
 bot.on("guildCreate", guild => {
