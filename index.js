@@ -102,7 +102,7 @@ function sendPicture () {
   request(siteUrl, function(err, res, body){
     if (!err && res.statusCode == 200) {
       var importedJSON = JSON.parse(body);
-      var imageURL = importedJSON.data.children[0].data.url;
+      var imageURL = importedJSON.data.children[1].data.url;
       console.log("POSTING...")
       // Setting all posting channels
       NotifyChannels = [];
