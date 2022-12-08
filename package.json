@@ -11,7 +11,7 @@
   "dependencies": {
     "discord.js": "^11.3.2",
     "dotenv": "^6.0.0",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "heroku": "^7.0.98",
     "heroku-cli": "^7.0.9",
     "http": "0.0.0",
